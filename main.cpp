@@ -1,20 +1,43 @@
 #include <iostream>
 #include<stack>
-#include <list>
 
 using namespace std;
 
+bool is_legal=true;
 int main() {
-    stack<int> s;
-    string *str = new string[10];
-    scanf("%c", &str);
-//    scanf("%c", &str[1]);
-//    printf("%c",str);
-    cout <<str[0]<<endl;
-//    if (c == ")") {
-//
-//    }
+    int n;
+    cin>>n;
+    while (n--) {//////////////////////////////////
+        stack<int> s;
+        string str ;
+        cin >> str;
+        int i = 1;
+        s.push(str[0]);
+        while (!s.empty()) {
+            if (str[i] == '(' || str[i] == '[') {
+                s.push(str[i]);
+            } else if (str[i] == ')') {
+                if (s.top() == '(') {
+                    s.pop();
+                } else {
+                    is_legal = false;
+                    break;
+                }
+            } else if (str[i] == ']') {
+                if (s.top() == '[') {
+                    s.pop();
+                } else {
+                    is_legal = false;
+                    break;
+                }
+            }
+            i++;
+        }
+        if (!is_legal){
+            cout<<"illegal"<<endl;
+        } else{
+            cout<<"legal"<<endl;
+        }
+    }
     return 0;
-
-
 }
